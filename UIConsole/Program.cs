@@ -83,12 +83,19 @@ class HumanMouseSimulator
         Console.ReadLine();
     }
 
-    private static void TimerAction(object sender, ElapsedEventArgs e)
+    private static async void TimerAction(object sender, ElapsedEventArgs e)
     {
-        SmoothMoveMouse();
-        PressKey(VK_ESCAPE);
-        ToggleNumLock();
-        SetNewInterval();
+        await Task.Run(() =>
+        {
+            Console.WriteLine("двигаем мышь");
+            SmoothMoveMouse();
+            
+            PressKey(VK_ESCAPE);
+
+            Console.WriteLine("Num Lock");
+            ToggleNumLock();
+            SetNewInterval();
+        });
     }
 
     private static void SetNewInterval()
